@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import CartIcon from '../assets/cart-icon.svg'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProductData } from '../store/ProductReducer'
 
 const Header = () => {
     const cartItems = useSelector((state) => state.cartItems)
+    const dispatch = useDispatch()
+    useEffect(()=>{
+      dispatch(fetchProductData())
+    },[])
   return (
     <header>
         <div className='header-contents'>

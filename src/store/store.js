@@ -1,10 +1,10 @@
-import { combineReducers, createStore } from "redux";
 import ProductReducer from "./ProductReducer";
 import CartReducer from "./CartReducer";
+import { configureStore } from "@reduxjs/toolkit";
 
-const reducer = combineReducers({
+export const store = configureStore({reducer:{
     products : ProductReducer,
     cartItems : CartReducer
+},
+middleware: (getDefaultMiddleware)=> [...getDefaultMiddleware()]
 })
-export const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__?.())
-

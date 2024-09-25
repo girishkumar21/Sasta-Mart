@@ -1,14 +1,17 @@
 import { useDispatch, useSelector } from "react-redux"
-import { decreaseCartItemQuantity, increaseCartItemQuantity } from "../store/CartReducer";
+import { decreaseCartItemQuantity, increaseCartItemQuantity, removeCartItem } from "../store/CartReducer";
 
 
 const CartItems = ({id, title, image, rating, quantity, price}) => {
   const dispatch = useDispatch();
   function quantityDecreaseHandler(){
-     return dispatch(decreaseCartItemQuantity(id))
+     return dispatch(decreaseCartItemQuantity({id}))
   }
   function quantityIncreaseHandler(){
-    return dispatch(increaseCartItemQuantity(id))
+    return dispatch(increaseCartItemQuantity({id}))
+ }
+ function deleteHandler(){
+  return dispatch(removeCartItem({id}))
  }
   return (
     <div className="cart-item-container">
@@ -24,6 +27,7 @@ const CartItems = ({id, title, image, rating, quantity, price}) => {
         <button onClick={quantityDecreaseHandler}>-</button>
         <span>{quantity}</span>
         <button onClick={quantityIncreaseHandler}>+</button>
+        <button onClick={deleteHandler}>Remove</button>
       </div>
       <div className="item-total">Rs. {(quantity * price).toFixed(2)}</div>
     </div>
